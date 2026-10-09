@@ -9,6 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation3.runtime.NavKey
+import com.lmcoding.nexttome.annotation.ThemePreviews
+import com.lmcoding.nexttome.navigation.Route
 import com.lmcoding.nexttome.navigation.TopLevelDestination
 import org.jetbrains.compose.resources.painterResource
 
@@ -44,5 +46,17 @@ fun AppNavigationBar(
                 ),
             )
         }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun AppNavigationBarPreview(){
+    PreviewWrapper {
+        AppNavigationBar(
+            isVisible = true,
+            currentTopLevelKey = Route.Library,
+            onTabClick = {},
+        )
     }
 }
