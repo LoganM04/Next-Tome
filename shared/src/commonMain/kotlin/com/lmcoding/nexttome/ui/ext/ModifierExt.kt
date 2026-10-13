@@ -1,0 +1,21 @@
+package com.lmcoding.nexttome.ui.ext
+
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+
+fun Modifier.vertical(): Modifier = layout { measurable, constraints ->
+    val placeable = measurable.measure(
+        constraints.copy(
+            minWidth = 0,
+            maxWidth = constraints.maxHeight,
+            minHeight = 0,
+            maxHeight = constraints.maxWidth,
+        )
+    )
+    layout(placeable.height, placeable.width) {
+        placeable.place(
+            x = -(placeable.width / 2 - placeable.height / 2),
+            y = -(placeable.height / 2 - placeable.width / 2),
+        )
+    }
+}

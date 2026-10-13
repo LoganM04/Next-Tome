@@ -1,13 +1,16 @@
 package com.lmcoding.nexttome.feature.library.components
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Search
@@ -22,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.lmcoding.nexttome.annotation.ThemePreviews
 import com.lmcoding.nexttome.feature.library.domain.BookType
+import com.lmcoding.nexttome.feature.library.domain.label
 import com.lmcoding.nexttome.ui.components.PreviewWrapper
 import com.lmcoding.nexttome.ui.components.TextList
 import com.lmcoding.nexttome.ui.components.TextListDisplay
@@ -61,7 +65,7 @@ private fun LibraryScreenHeaderTitleRow(){
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ){
-        Text("Ma biblio", style = MaterialTheme.typography.bodyLarge)
+        Text("Ma biblio", style = MaterialTheme.typography.titleLarge)
 
         Row (
             verticalAlignment = Alignment.CenterVertically,
@@ -89,14 +93,16 @@ private fun LibraryScreenHeaderFilter(
 //    selectedType: BookType?,
 //    onTypeSelected: (BookType?) -> Unit,
 ) {
-    LazyRow(
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        item(key = "all") {
-            BookTypeChip("Tous", selected = false) {  }
-        }
-        items(items = bookTypes, key = { it.id }) { type ->
-            BookTypeChip(type.name, selected = false) { }
+        BookTypeChip("Tous", selected = true) {  }
+        BookType.entries.forEach { type ->
+            BookTypeChip(type.label, selected = false) {  }
         }
     }
 }
@@ -126,11 +132,4 @@ private fun LibraryScreenHeaderPreview(){
         LibraryScreenHeader()
     }
 }
-
-val bookTypes = listOf<BookType>(
-    BookType(1, "Manga"),
-    BookType(2, "BD"),
-    BookType(3, "Comics"),
-    BookType(4, "Roman"),
-)
         

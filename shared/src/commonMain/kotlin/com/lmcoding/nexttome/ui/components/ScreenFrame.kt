@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,15 +17,13 @@ fun ScreenFrame(
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.colorScheme.background,
     topBar: @Composable () -> Unit = {},
-    content: @Composable () -> Unit
-){
-    Surface(
-        modifier = Modifier.fillMaxSize().then(modifier),
-        color = backgroundColor
-    ) {
-        Column (Modifier.fillMaxSize()){
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    val scaffoldPadding = LocalScaffoldPadding.current
+    Surface(modifier = Modifier.fillMaxSize().then(modifier), color = backgroundColor) {
+        Column(Modifier.fillMaxSize()) {
             Box(Modifier.statusBarsPadding()){ topBar() }
-            Box(Modifier.weight(1f)) { content() }
+            Box(Modifier.weight(1f)) { content(scaffoldPadding) }
         }
     }
 }
