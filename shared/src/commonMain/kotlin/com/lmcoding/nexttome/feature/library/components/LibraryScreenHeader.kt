@@ -1,5 +1,6 @@
 package com.lmcoding.nexttome.feature.library.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.FilterChip
@@ -35,13 +37,14 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun LibraryScreenHeader(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onAddBook: () -> Unit = {},
 ){
     Column (
         modifier = Modifier.fillMaxWidth().then(modifier),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ){
-        LibraryScreenHeaderTitleRow()
+        LibraryScreenHeaderTitleRow(onAddBook)
         Column {
             TextList(
                 modifier = Modifier.fillMaxWidth(),
@@ -57,8 +60,8 @@ internal fun LibraryScreenHeader(
 }
 
 @Composable
-private fun LibraryScreenHeaderTitleRow(){
-    val iconSize = 16f
+private fun LibraryScreenHeaderTitleRow(onAddBook: () -> Unit){
+    val iconSize = 24f
 
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -71,6 +74,13 @@ private fun LibraryScreenHeaderTitleRow(){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ){
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "Ajouter un livre",
+                modifier = Modifier.size(iconSize.dp).clickable(onClick = onAddBook),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
             Icon(
                 imageVector = Icons.Filled.Search,
                 contentDescription = null,
@@ -97,7 +107,7 @@ private fun LibraryScreenHeaderFilter(
         modifier = Modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp),
+            .padding(end = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         BookTypeChip("Tous", selected = true) {  }

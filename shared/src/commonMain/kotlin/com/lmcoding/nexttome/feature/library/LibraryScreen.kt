@@ -17,10 +17,10 @@ import com.lmcoding.nexttome.ui.components.PreviewWrapper
 import com.lmcoding.nexttome.ui.components.ScreenFrame
 
 @Composable
-fun LibraryScreen(){
+fun LibraryScreen(onAddBook: () -> Unit = {}){
     ScreenFrame(
         modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
-        topBar = { LibraryScreenHeader() }
+        topBar = { LibraryScreenHeader(onAddBook = onAddBook) }
     ) { paddingValues ->
         LibraryScreenContent()
     }

@@ -19,6 +19,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.lmcoding.nexttome.annotation.ThemePreviews
+import com.lmcoding.nexttome.feature.add.navigation.addBookEntry
 import com.lmcoding.nexttome.feature.library.navigation.libraryEntry
 import com.lmcoding.nexttome.feature.newRelease.navigation.newReleaseEntry
 import com.lmcoding.nexttome.feature.setting.navigation.settingEntry
@@ -67,6 +68,7 @@ private fun AppContent(navigator: Navigator){
             libraryEntry(navigator = navigator)
             newReleaseEntry(navigator = navigator)
             settingEntry(navigator = navigator)
+            addBookEntry(navigator = navigator)
         }
 
     NavDisplay(

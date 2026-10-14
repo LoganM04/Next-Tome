@@ -6,6 +6,7 @@ import com.lmcoding.nexttome.data.remote.network.source.GoogleBooksSource
 import com.lmcoding.nexttome.data.remote.network.source.OpenLibrarySource
 import com.lmcoding.nexttome.data.repository.BookLookupRepositoryImpl
 import com.lmcoding.nexttome.domain.repository.BookLookupRepository
+import com.lmcoding.nexttome.feature.add.AddBookViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -26,4 +27,8 @@ val dataModule = module {
     }
 }
 
-val appModules = listOf(networkModule, dataModule)
+val viewModelModule = module {
+    viewModelOf(::AddBookViewModel)
+}
+
+val appModules = listOf(networkModule, dataModule, viewModelModule)

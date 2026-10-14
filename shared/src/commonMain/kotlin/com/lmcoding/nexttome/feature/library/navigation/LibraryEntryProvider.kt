@@ -9,7 +9,7 @@ import com.lmcoding.nexttome.navigation.Route
 fun EntryProviderScope<NavKey>.libraryEntry(navigator: Navigator){
     entry<Route.Library>{
         LibraryScreen(
-
+            onAddBook = { navigator.navigate(Route.AddBook) },
         )
     }
 }
